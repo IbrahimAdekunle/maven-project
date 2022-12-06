@@ -44,7 +44,7 @@ pipeline {
         
       stage('Run the webapp container') {
           steps {
-              sh "docker run --name webapp_v${BUILD_NUMBER} -p 8087:8080 -d ibrahim2022/webapp:v${BUILD_NUMBER}"
+              sh "docker run --name webapp_v${BUILD_NUMBER} -p 8787:8080 -d ibrahim2022/webapp:v${BUILD_NUMBER}"
             }
         }
     }

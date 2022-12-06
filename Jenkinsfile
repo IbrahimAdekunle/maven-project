@@ -33,9 +33,13 @@ pipeline {
           
       stage('Push image to Docker Hub') {
           steps {
+              withCredentials([usernamePassword(credentialsId: 'Docker_hub_cred', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+        	    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+              }
+
               sh "docker tag webapp:v${BUILD_NUMBER}  ibrahim2022/webapp:v${BUILD_NUMBER}"
               sh "docker push ibrahim2022/webapp:v${BUILD_NUMBER}"
-            }
+          }
         }
         
       stage('Run the webapp container') {
